@@ -34,16 +34,13 @@ metadata {
 	}
 
     tiles {
-      standardTile("open", "device.switch", width: 1, height: 1, canChangeIcon: false) {
-			state "off", label: 'Open', action: gateOpen, icon: "st.Outdoor.outdoor8", backgroundColor: "#ccffcc", nextState: "toggle"
-            state "toggle", label:'toggle', action: "", icon: "st.Outdoor.outdoor8", backgroundColor: "#53a7c0"
-		      
+      standardTile("open", "device.switch", width: 3, height: 2, canChangeIcon: false) {
+			state "closed", label: 'Open', action: gateOpen, icon: "st.Outdoor.outdoor8", backgroundColor: "#00E500"
 		}         
-       standardTile("close", "device.switch2", width: 1, height: 1, canChangeIcon: false) {
-			state "off", label: 'Open', action: gateClose, icon: "st.Outdoor.outdoor8", backgroundColor: "#EE0000", nextState: "toggle"
-      state "toggle", label:'toggle', action: "", icon: "st.Outdoor.outdoor8", backgroundColor: "#53a7c0"
-			          
-		}         
+       standardTile("close", "device.switch2", width: 3, height: 2, canChangeIcon: false) {
+			state "open", label: 'Close', action: gateClose, icon: "st.Outdoor.outdoor8", backgroundColor: "#EE0000"			          
+		}  
+        main "open"
       details(["open", "close"])
     }
 }
@@ -99,7 +96,7 @@ def gateCmd(int command)
     }
     else if(command == 0)
     {
-    def path = "/axis-cgi/io/port.cgi?action=2:\"
+    def path = "/axis-cgi/io/port.cgi?action=2:\\"
   log.debug "path is: $path"
   try {
     def hubAction = new physicalgraph.device.HubAction(
